@@ -20,6 +20,8 @@ import { mergeCandidate, distanceMeters } from "@/lib/merge";
 import { groupReport, findDuplicates, confirmDuplicate } from "@/lib/actions";
 import { AiBadge } from "./ai-badge";
 import { IncidentMap } from "./incident-map";
+import { JudgeTour } from "./judge-tour";
+import roadNetwork from "@/data/chennai-roads.json";
 export function Dashboard({
   d,
   filter = "all",
@@ -64,17 +66,20 @@ export function Dashboard({
     .map((r) => ({ road: r, risk: riskScore(r.id, d.incidents, d.jobs, now) }))
     .sort((a, b) => b.risk.score - a.risk.score);
   const suggestions = d.demo || ai ? d.suggestions : [];
+  const groupedIncident = d.incidents.find(
+    (i) => d.reports.filter((r) => r.incident_id === i.id).length >= 5,
+  );
   return (
     <>
-      <div className="heading">
+      <div className="heading dashboard-heading">
         <div>
-          <span className="eyebrow">THE BIG PICTURE</span>
+          <span className="eyebrow">ROADWATCH / CITY OPERATIONS</span>
           <h1>
             {d.role === "citizen"
               ? "Your voice. Better roads."
               : d.role === "reviewer"
                 ? "Verify the work. Keep the memory."
-                : "Better roads start with follow-through."}
+                : "Fix roads. Keep promises."}
           </h1>
           <p>
             {d.role === "officer"
@@ -93,6 +98,85 @@ export function Dashboard({
             Review repairs <ArrowUpRight size={14} />
           </Link>
         )}
+      </div>
+      <section
+        className="mission-banner"
+        aria-label="Repair memory and demo walkthrough"
+      >
+        <div className="mission-copy">
+          <span className="eyebrow">THE ROAD REMEMBERS</span>
+          <h2>
+            A complaint ends.
+            <br />
+            Accountability doesn’t.
+          </h2>
+          <p>
+            One repair job. Every citizen’s ticket. A history that catches the
+            next failure.
+          </p>
+          <div className="actions">
+            <JudgeTour
+              groupedHref={
+                groupedIncident
+                  ? `/incidents/${groupedIncident.id}`
+                  : "/tickets"
+              }
+              memoryHref={
+                memory ? `/incidents/${memory.id}` : "/?filter=repeat"
+              }
+            />
+            <Link href="/roads" className="mission-source">
+              Explore {roadNetwork.ways.length} real road segments{" "}
+              <ArrowUpRight size={15} />
+            </Link>
+          </div>
+        </div>
+        <div className="mission-visual" aria-hidden="true">
+          <svg viewBox="0 0 360 190" fill="none">
+            <path
+              d="M0 150h110q30 0 30-30V65q0-30 30-30h190M0 165h110q45 0 45-45V65q0-15 15-15h190"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+            <path
+              d="M0 110h90q30 0 30-30V0M210 190V85q0-20 20-20h130M0 25h75q20 0 20 20v145"
+              stroke="currentColor"
+              strokeOpacity=".25"
+              strokeWidth="2"
+            />
+            <circle cx="139" cy="117" r="22" fill="#163e42" stroke="#98f4c3" />
+            <path d="m131 117 6 6 12-12" stroke="#98f4c3" strokeWidth="3" />
+            <circle cx="266" cy="43" r="9" fill="#f4a24c" />
+            <circle
+              cx="266"
+              cy="43"
+              r="19"
+              stroke="#f4a24c"
+              strokeOpacity=".4"
+            />
+            <path d="M157 107h62" stroke="#98f4c3" strokeDasharray="4 5" />
+          </svg>
+          <span className="mission-proof">
+            <ShieldCheck size={14} />
+            Human verified. Always.
+          </span>
+        </div>
+      </section>
+      <div className="workflow-strip" aria-label="Repair workflow">
+        {[
+          ["01", "Report", "A permanent citizen ticket"],
+          ["02", "Confirm", "An officer groups the evidence"],
+          ["03", "Repair", "A dated job and after-photo"],
+          ["04", "Verify", "A reviewer confirms the work"],
+        ].map(([n, title, detail]) => (
+          <div key={n}>
+            <span>{n}</span>
+            <div>
+              <b>{title}</b>
+              <small>{detail}</small>
+            </div>
+          </div>
+        ))}
       </div>
       <div className="stats">
         {[

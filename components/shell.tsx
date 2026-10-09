@@ -31,17 +31,21 @@ export function Shell({
       ClipboardList,
     ],
     ["memory", "Repair memory", "/?filter=repeat", Route],
+    ["roads", "Real road network", "/roads", MapPinned],
     ["analytics", "Insights & audit", "/analytics", ChartNoAxesCombined],
   ] as const;
   return (
     <div className="shell">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <aside className="sidebar">
         <div>
           <Link href={"/" + suffix} className="brand">
             <span className="brand-icon">
               <Route size={22} />
             </span>
-            RoadWatch<span style={{ color: "#a0af8d" }}>®</span>
+            RoadWatch
           </Link>
           <div className="tagline">EVERY REPAIR REMEMBERED</div>
         </div>
@@ -54,6 +58,7 @@ export function Shell({
               <Link
                 key={key}
                 className={active === key ? "active" : ""}
+                aria-current={active === key ? "page" : undefined}
                 href={
                   url + (url.includes("?") ? suffix.replace("?", "&") : suffix)
                 }
@@ -106,7 +111,7 @@ export function Shell({
       <section className="workspace">
         <header className="topbar">
           <div>
-            <b>Ward 12</b>
+            <b>{active === "roads" ? "Road network" : "Ward 12"}</b>
             <span style={{ color: "#bdc4b6", margin: "0 12px" }}>/</span>
             <small>Central · Chennai</small>
           </div>
@@ -167,7 +172,7 @@ export function Shell({
             </div>
           </div>
         )}
-        <main className="main">
+        <main className="main" id="main-content" tabIndex={-1}>
           {children}
           <footer className="footer">
             <span>ROADWATCH · BUILT FOR ACCOUNTABLE ROADS</span>

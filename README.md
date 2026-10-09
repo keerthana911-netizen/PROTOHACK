@@ -61,7 +61,7 @@ This writes ignored local credentials without printing them, uploads fixtures, a
 Use a dedicated development project for the demo seed, not a municipality's production database.
 
 1. Create a Supabase project. Set its Auth site URL to your Next.js origin. Email/password authentication is sufficient; user self-registration is outside this MVP.
-2. Apply the seven `supabase/migrations/*.sql` files in filename order using the SQL Editor, or link the CLI and push:
+2. Apply the eight `supabase/migrations/*.sql` files in filename order using the SQL Editor, or link the CLI and push:
 
 ```sh
 npx supabase login
@@ -158,9 +158,10 @@ Final verified output (9 October 2026):
 ✓ tests/actions.test.ts (6 tests)
 ✓ tests/core.test.ts (32 tests)
 ✓ tests/warranty.test.ts (1 test)
+✓ tests/road-network.test.ts (4 tests)
 ↓ tests/database.integration.test.ts (10 tests | 10 skipped)
-Test Files  5 passed | 1 skipped (6)
-Tests       51 passed | 10 skipped (61)
+Test Files  6 passed | 1 skipped (7)
+Tests       55 passed | 10 skipped (65)
 ```
 
 `npm run typecheck` exited 0. `next build` compiled successfully and generated all routes. PostgreSQL syntax parser passed every migration and the seed. Structural security checks explicitly identify themselves as structural; only the live suite can establish that actual Supabase grants, triggers, RLS, and persistence behave correctly. Production install prompt and phone/browser speech recognition remain device checks.
@@ -205,3 +206,31 @@ Multilingual support, municipal integrations, WhatsApp bots, leaderboards, a tra
 
 Commits follow the requested numbered phases: schema/PWA; auth; reporting; officer workflow; reviewer gate; priority; repair memory; triage/governance; semantic deduplication; brief/voice; risk/scorecard; analytics; full seed story; acceptance tests, connected screens, polish, and this README. Screen assembly and integration were completed in phase 14 after the underlying workflow commits. No phase was squashed away.
 
+## UI refresh and real-road explorer
+
+The follow-up refresh adds a navy/mint operations interface, a prominent repair-memory story, a six-step judge walkthrough, keyboard focus indicators, a skip link, reduced-motion support, and larger mobile controls. These are implementation improvements, not a claim of certified accessibility or a formal “2026 UI standard.” Browser automation timed out during this refresh, so visual desktop/mobile screenshot QA remains unverified. The dashboard and `/roads` both returned HTTP 200, and TypeScript passed.
+
+`/roads` is a searchable, interactive catalogue of **80 real OpenStreetMap road segments / 41 named streets** in a central Chennai sample. Select a row to highlight its geometry and open its source way page. `data/chennai-roads.json` preserves attribution, source endpoint, query bounds, retrieval time, and the upstream snapshot time. The upstream data timestamp is **24 July 2026**, displayed in the UI; retrieval does not make that data real-time.
+
+**Real road geometry is not real complaint history.** The repair-memory records, contractor names, failure dates, and images in the preview remain labeled demo data. No residents' contact information or grievance records were scraped. The [Greater Chennai Corporation grievance portal](https://erp.chennaicorporation.gov.in/pgr/) was reviewed as a reference, but no public licensed complaint/repair feed was verified or connected. Real citizen reports can be collected through the authenticated Supabase workflow after configuration.
+
+Data attribution: © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL 1.0. The source dataset is separately licensed under ODbL; this does not assign an OpenStreetMap software license to application code. Refresh the small cached extract explicitly, rather than calling public Overpass services on every page view:
+
+```sh
+npm run data:roads
+```
+
+The primary public endpoint refused the initial request. The successful extract used the Kumi instance (now Private.coffee), listed in the [OpenStreetMap public Overpass documentation](https://wiki.openstreetmap.org/wiki/Overpass_API). To select that documented instance for a later refresh in PowerShell:
+
+```powershell
+$env:OVERPASS_ENDPOINT = 'https://overpass.private.coffee/api/interpreter'
+npm run data:roads
+```
+
+To prepare a real-road import for a configured Supabase database, first apply migration `202610090015_road_sources.sql`. Review each segment's jurisdiction: the sample is **not** a verified municipal ward boundary. Then generate reviewable SQL for the operator-reviewed ward:
+
+```sh
+npm run data:export -- --ward YOUR_VERIFIED_WARD_UUID --ward-assignment-reviewed
+```
+
+Review `data/import-roads.sql` before applying it through the SQL Editor. The utility validates numeric OSM IDs, names, coordinates, and the supplied UUID, uses deterministic road IDs, and preserves existing segments/tickets on conflicts. It writes a file only; it never modifies a database. Source URL, OSM way ID, and snapshot time are retained on imported road rows. No fictional incident is reassigned to a real road.

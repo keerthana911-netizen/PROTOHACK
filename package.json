@@ -8,7 +8,9 @@
     "start": "next start",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "check:sql": "node scripts/validate-sql.mjs"
+    "check:sql": "node scripts/validate-sql.mjs",
+    "data:roads": "node scripts/fetch-road-network.mjs",
+    "data:export": "node scripts/export-road-import.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
