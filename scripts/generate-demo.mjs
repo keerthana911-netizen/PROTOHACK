@@ -1,4 +1,7 @@
 import fs from "node:fs";
+const potholeSamples = JSON.parse(
+  fs.readFileSync("data/pothole-samples.json", "utf8"),
+).samples;
 const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 const anchor = new Date("2026-10-09T12:00:00Z");
 const date = (d) => new Date(+anchor + d * 86400000).toISOString();
@@ -82,7 +85,8 @@ function R(n, i, note, days, road = 101, lat = 13.0827, lng = 80.2707) {
       : "submitted",
     incident_id: incident?.id ?? null,
     created_at: date(days),
-    photo_url: "/demo-pothole.png",
+    photo_url:
+      potholeSamples[Math.abs((i ?? n) - 201) % potholeSamples.length].image,
   });
 }
 for (let n = 1; n <= 5; n++)

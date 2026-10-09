@@ -4,6 +4,7 @@ import { loadData } from "@/lib/data";
 import { Shell } from "@/components/shell";
 import { Timeline } from "@/components/timeline";
 import { flagUnresolved } from "@/lib/actions";
+import { ReportPhoto } from "@/components/report-photo";
 export const dynamic = "force-dynamic";
 export default async function Ticket({
   params,
@@ -34,15 +35,11 @@ export default async function Ticket({
           <h2>Your report stays with you.</h2>
           <p>{r.note}</p>
           {r.photo_url ? (
-            <img
-              className="photo"
-              src={r.photo_url}
-              alt="Reported road damage"
-            />
+            <ReportPhoto id={r.id} url={r.photo_url} />
           ) : (
             <p className="notice">
-              Photo is unavailable. Upload seed illustrations to the private
-              bucket if this is a demo record.
+              Photo is unavailable. Upload seed photos to the private bucket if
+              this is a demo record.
             </p>
           )}
           <p className="breakdown">

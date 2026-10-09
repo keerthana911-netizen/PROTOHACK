@@ -44,7 +44,7 @@ npx supabase start
 node --env-file=.env.local scripts/upload-demo-photos.mjs
 ```
 
-The seed images are explicitly labeled **DEMO ILLUSTRATION**. They are uploaded into the private bucket. The public illustrated preview assets are not citizen photos. SQL intentionally does not pretend to upload object bytes; skipping this step leaves seeded photos unavailable.
+Seed damage photos are six original CC0 dataset samples, with captions identifying their locations and report histories as simulated. Repair images are explicitly labeled **DEMO ILLUSTRATION**, not verified after-photos. The upload script puts both into the private bucket. SQL does not upload object bytes; skipping this step leaves seeded photos unavailable.
 
 5. Restart Next.js after configuring the environment. Sign in using the demo credentials below.
 6. To reset only the disposable local project, use `npx supabase db reset`, then upload demo photos again. This deletes local project data; do not use it against a database with records you need.
@@ -55,6 +55,14 @@ The seed images are explicitly labeled **DEMO ILLUSTRATION**. They are uploaded 
 ```
 
 This writes ignored local credentials without printing them, uploads fixtures, and runs the live acceptance tests. It refuses to overwrite existing configuration.
+
+## Real pothole photo samples
+
+`/evidence` displays six original images and 29 PASCAL VOC bounding boxes from [Yam Peleg’s Potholes Object Detection dataset](https://www.kaggle.com/datasets/yamqwe/potholes-object-detection), credited to [Make ML](https://makeml.app/datasets/potholes). Kaggle lists version 1 under CC0/Public Domain. Original PNGs are stored in `public/dataset-potholes`; original XML labels are retained in `data/pothole-samples`; `data/pothole-samples.json` records attribution, retrieval time, dimensions and SHA-256 hashes. The data card declares 600 images; only six selected samples were imported.
+
+The demo tickets use these real damage photos with explicit captions. Dataset coordinates are bounding-box pixels, not GPS. Ticket locations, dates, severity, AI fixture responses, contractors and repair outcomes remain simulated. Dataset boxes are original annotations, not predictions from a trained RoadWatch model. No detection model was trained or evaluated, and this small sample is not an evaluation benchmark. Repair illustrations remain visibly labeled. The second suggested dataset, `ashishkumarak/training-setzip`, was not imported because Kaggle lists its license as Unknown.
+
+To refresh the same six public samples (network required), run `./scripts/fetch-pothole-samples.ps1`, then `node scripts/generate-demo.mjs`. The fetch checks the license, PNG signatures and annotation bounds; the integrity tests additionally verify image dimensions and hashes. Re-upload seed photos to a configured development Supabase project using the command above; no cloud database or storage write was performed during this integration.
 
 ## Supabase cloud setup
 
@@ -159,9 +167,10 @@ Final verified output (9 October 2026):
 ✓ tests/core.test.ts (32 tests)
 ✓ tests/warranty.test.ts (1 test)
 ✓ tests/road-network.test.ts (4 tests)
+✓ tests/pothole-samples.test.ts (3 tests)
 ↓ tests/database.integration.test.ts (10 tests | 10 skipped)
-Test Files  6 passed | 1 skipped (7)
-Tests       55 passed | 10 skipped (65)
+Test Files  7 passed | 1 skipped (8)
+Tests       58 passed | 10 skipped (68)
 ```
 
 `npm run typecheck` exited 0. `next build` compiled successfully and generated all routes. PostgreSQL syntax parser passed every migration and the seed. Structural security checks explicitly identify themselves as structural; only the live suite can establish that actual Supabase grants, triggers, RLS, and persistence behave correctly. Production install prompt and phone/browser speech recognition remain device checks.
@@ -208,7 +217,7 @@ Commits follow the requested numbered phases: schema/PWA; auth; reporting; offic
 
 ## UI refresh and real-road explorer
 
-The follow-up refresh adds a navy/mint operations interface, a prominent repair-memory story, a six-step judge walkthrough, keyboard focus indicators, a skip link, reduced-motion support, and larger mobile controls. These are implementation improvements, not a claim of certified accessibility or a formal “2026 UI standard.” Browser automation timed out during this refresh, so visual desktop/mobile screenshot QA remains unverified. The dashboard and `/roads` both returned HTTP 200, and TypeScript passed.
+The follow-up refresh adds a navy/mint operations interface, a prominent repair-memory story, a seven-step judge walkthrough including real dataset evidence, keyboard focus indicators, a skip link, reduced-motion support, and larger mobile controls. These are implementation improvements, not a claim of certified accessibility or a formal “2026 UI standard.” Browser automation timed out during this refresh, so visual desktop/mobile screenshot QA remains unverified. The dashboard and `/roads` both returned HTTP 200, and TypeScript passed.
 
 `/roads` is a searchable, interactive catalogue of **80 real OpenStreetMap road segments / 41 named streets** in a central Chennai sample. Select a row to highlight its geometry and open its source way page. `data/chennai-roads.json` preserves attribution, source endpoint, query bounds, retrieval time, and the upstream snapshot time. The upstream data timestamp is **24 July 2026**, displayed in the UI; retrieval does not make that data real-time.
 
@@ -234,3 +243,5 @@ npm run data:export -- --ward YOUR_VERIFIED_WARD_UUID --ward-assignment-reviewed
 ```
 
 Review `data/import-roads.sql` before applying it through the SQL Editor. The utility validates numeric OSM IDs, names, coordinates, and the supplied UUID, uses deterministic road IDs, and preserves existing segments/tickets on conflicts. It writes a file only; it never modifies a database. Source URL, OSM way ID, and snapshot time are retained on imported road rows. No fictional incident is reassigned to a real road.
+
+The dataset integration passed browser checks for the six-photo gallery, hiding/restoring all six annotation overlays, and the simulated-report caption on a ticket. Responsive DOM checks showed one gallery column at the phone-sized preview and two columns at the desktop preview, with no body overflow. A full-page gallery screenshot is saved locally as `output/dataset-evidence.jpg` (ignored by Git). The evidence page, ticket and incident pages, and all six PNG routes returned HTTP 200. The production build and TypeScript check passed. Live Supabase storage/authentication and model inference remain unverified.

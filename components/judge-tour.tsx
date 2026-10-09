@@ -13,6 +13,12 @@ export function JudgeTour({
   const [step, setStep] = useState(0);
   const steps = [
     {
+      title: "Start with real evidence",
+      body: "Inspect six public pothole photos and their source annotations. Demo ticket locations and repair histories remain simulated. The boxes are dataset labels, not AI predictions.",
+      href: "/evidence",
+      label: "Inspect the dataset photos",
+    },
+    {
       title: "Start with the promise",
       body: "Rules decide real outcomes. AI only suggests. An authenticated officer confirms grouping, and a reviewer verifies closure.",
       href: "/analytics",

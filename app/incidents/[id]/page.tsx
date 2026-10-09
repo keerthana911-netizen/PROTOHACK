@@ -15,6 +15,7 @@ import {
 } from "@/lib/actions";
 import { aiEnabled } from "@/lib/ai";
 import { AiBadge } from "@/components/ai-badge";
+import { ReportPhoto } from "@/components/report-photo";
 export const dynamic = "force-dynamic";
 export default async function IncidentPage({
   params,
@@ -87,13 +88,7 @@ export default async function IncidentPage({
                   {r.ticket_id} →
                 </Link>
                 <p>{r.note}</p>
-                {r.photo_url && (
-                  <img
-                    className="photo"
-                    src={r.photo_url}
-                    alt={`Road damage for ${r.ticket_id}`}
-                  />
-                )}
+                {r.photo_url && <ReportPhoto id={r.id} url={r.photo_url} />}
                 <small>
                   {new Date(r.created_at).toLocaleDateString("en-IN")} ·{" "}
                   {r.location_source}
@@ -184,11 +179,19 @@ export default async function IncidentPage({
                   {job.warranty_days}-day warranty
                 </p>
                 {job.photo_url && (
-                  <img
-                    src={job.photo_url}
-                    alt="Repair after-photo"
-                    className="photo"
-                  />
+                  <figure className="evidence-photo">
+                    <img
+                      src={job.photo_url}
+                      alt="Repair after-photo"
+                      className="photo"
+                    />
+                    {job.photo_url === "/demo-repair.png" && (
+                      <figcaption>
+                        <b>Demo repair illustration</b>
+                        <span>This is not a verified repair photograph.</span>
+                      </figcaption>
+                    )}
+                  </figure>
                 )}
                 {job.repaired_at && (
                   <p>

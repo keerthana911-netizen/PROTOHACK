@@ -64,7 +64,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000201",
       "created_at": "2026-08-05T14:24:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000302",
@@ -78,7 +78,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000201",
       "created_at": "2026-08-05T16:48:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000303",
@@ -92,7 +92,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000201",
       "created_at": "2026-08-05T19:12:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000304",
@@ -106,7 +106,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000201",
       "created_at": "2026-08-05T21:36:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000305",
@@ -120,7 +120,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000201",
       "created_at": "2026-08-06T00:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000306",
@@ -134,7 +134,7 @@
       "status": "grouped",
       "incident_id": "00000000-0000-4000-8000-000000000202",
       "created_at": "2026-09-29T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes10.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000307",
@@ -148,7 +148,7 @@
       "status": "grouped",
       "incident_id": "00000000-0000-4000-8000-000000000204",
       "created_at": "2026-10-07T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes103.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000308",
@@ -162,7 +162,7 @@
       "status": "grouped",
       "incident_id": "00000000-0000-4000-8000-000000000205",
       "created_at": "2026-10-07T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes105.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000309",
@@ -176,7 +176,7 @@
       "status": "assigned",
       "incident_id": "00000000-0000-4000-8000-000000000206",
       "created_at": "2026-09-27T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes108.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000310",
@@ -190,7 +190,7 @@
       "status": "repaired_pending_review",
       "incident_id": "00000000-0000-4000-8000-000000000207",
       "created_at": "2026-10-03T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes1.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000311",
@@ -204,7 +204,7 @@
       "status": "grouped",
       "incident_id": "00000000-0000-4000-8000-000000000208",
       "created_at": "2026-10-02T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes10.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000312",
@@ -218,7 +218,7 @@
       "status": "submitted",
       "incident_id": null,
       "created_at": "2026-10-09T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes103.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000313",
@@ -232,7 +232,7 @@
       "status": "submitted",
       "incident_id": null,
       "created_at": "2026-10-09T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes100.png"
     },
     {
       "id": "00000000-0000-4000-8000-000000000314",
@@ -246,7 +246,7 @@
       "status": "closed",
       "incident_id": "00000000-0000-4000-8000-000000000203",
       "created_at": "2026-06-01T12:00:00.000Z",
-      "photo_url": "/demo-pothole.png"
+      "photo_url": "/dataset-potholes/potholes100.png"
     }
   ],
   "incidents": [

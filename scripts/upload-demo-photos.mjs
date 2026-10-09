@@ -13,7 +13,7 @@ for (const r of d.reports) {
     .from("road-photos")
     .upload(
       `${r.reporter_id}/demo-report-${r.id}.png`,
-      fs.readFileSync("public/demo-pothole.png"),
+      fs.readFileSync(`public${r.photo_url}`),
       { contentType: "image/png", upsert: true },
     );
   if (error) throw error;
@@ -28,4 +28,6 @@ for (const j of d.jobs.filter((j) => j.repaired_at)) {
     );
   if (error) throw error;
 }
-console.log("Uploaded demo illustrations to the private bucket.");
+console.log(
+  "Uploaded CC0 sample damage photos and demo repair illustrations to the private bucket. Report locations and histories remain simulated.",
+);

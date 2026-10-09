@@ -9,6 +9,7 @@ import {
   Route,
   LogOut,
   Bell,
+  Images,
 } from "lucide-react";
 import { logout } from "@/lib/auth-actions";
 import type { Dataset } from "@/lib/types";
@@ -32,6 +33,7 @@ export function Shell({
     ],
     ["memory", "Repair memory", "/?filter=repeat", Route],
     ["roads", "Real road network", "/roads", MapPinned],
+    ["evidence", "Dataset evidence", "/evidence", Images],
     ["analytics", "Insights & audit", "/analytics", ChartNoAxesCombined],
   ] as const;
   return (
