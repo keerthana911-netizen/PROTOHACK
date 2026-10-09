@@ -1,27 +1,5 @@
+-- Officer-confirmed grouping; preserve separate report and incident status vocabularies.
 create function public.group_report(target uuid, match_id uuid, explanation text) returns uuid language plpgsql security definer set search_path=public as $$
-declare r reports; i incidents; new_id uuid;
-begin
- select * into r from reports where id=target for update;
- if not found then raise exception 'Report not found'; end if;
- perform require_officer(r.road_segment_id);
- if r.incident_id is not null then raise exception 'Report already grouped'; end if;
- if length(trim(explanation))<5 then raise exception 'Written reason required'; end if;
- perform set_config('roadwatch.reason',explanation,true);
- if match_id is null then
- insert into incidents(road_segment_id,location) values(r.road_segment_id,r.location) returning id into new_id;
- else
- select * into i from incidents where id=match_id for update;
- if not found or i.status not in ('open','assigned') then raise exception 'Only open or assigned incidents can receive reports'; end if;
- perform require_officer(i.road_segment_id);
- if i.road_segment_id<>r.road_segment_id then raise exception 'Confirm the correct road segment before merging'; end if;
- new_id:=i.id;
- end if;
- update reports set incident_id=new_id,status=case when match_id is not null then i.status else 'grouped' end where id=r.id;
- -- open incident uses grouped report status, not the incident's open vocabulary.
- return new_id;
-end$$;
--- Replace the report status assignment to keep report and incident state vocabularies distinct.
-create or replace function public.group_report(target uuid, match_id uuid, explanation text) returns uuid language plpgsql security definer set search_path=public as $$
 declare r reports; i incidents; new_id uuid;
 begin
  select * into r from reports where id=target for update;
@@ -70,3 +48,4 @@ begin
  update incidents set status='repaired_pending_review' where id=target;
  update reports set status='repaired_pending_review' where incident_id=target;
 end$$;
+
