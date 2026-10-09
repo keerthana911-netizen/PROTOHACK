@@ -4,6 +4,10 @@
 
 A mobile-first pothole reporting MVP built with Next.js App Router, TypeScript, Tailwind, Supabase Auth/Postgres/PostGIS/pgvector/private Storage, Leaflet/OpenStreetMap, and the OpenAI SDK. Citizens keep their permanent tickets even when several reports become one repair job. Recorded repair history identifies repeat failures and attaches the responsible contractor and warranty window.
 
+Public demo: https://roadwatch-hema-protohack.hemabhushantadithuri.chatgpt.site
+
+Published through Sites on 9 October 2026 with public access. The separate hosting checkout in `sites/roadwatch` uses the Sites Vinext/Cloudflare Worker starter; this root project retains Next.js. The production build and live dashboard trend controls were verified. The public demo has no backend credentials and remains read only; citizen records and repair histories are illustrative, with real dataset photos and a sourced OpenStreetMap road sample clearly labeled.
+
 ## Verification status
 
 The application builds and the offline acceptance suite passes. No Supabase project credentials or OpenAI key were supplied. Docker Desktop is installed; its engine did not respond after a background startup attempt. The local Supabase start was stopped without obtaining a running database. **Live database/RLS, real authentication, private uploads, and an end-to-end repair workflow are therefore not yet verified.** The ten integration tests are implemented and skipped unless explicitly configured. SQL parsing is a syntax check, not a substitute for executing migrations or exercising RLS.
