@@ -168,9 +168,10 @@ Final verified output (9 October 2026):
 ✓ tests/warranty.test.ts (1 test)
 ✓ tests/road-network.test.ts (4 tests)
 ✓ tests/pothole-samples.test.ts (3 tests)
+✓ tests/operations.test.ts (7 tests)
 ↓ tests/database.integration.test.ts (10 tests | 10 skipped)
-Test Files  7 passed | 1 skipped (8)
-Tests       58 passed | 10 skipped (68)
+Test Files  8 passed | 1 skipped (9)
+Tests       65 passed | 10 skipped (75)
 ```
 
 `npm run typecheck` exited 0. `next build` compiled successfully and generated all routes. PostgreSQL syntax parser passed every migration and the seed. Structural security checks explicitly identify themselves as structural; only the live suite can establish that actual Supabase grants, triggers, RLS, and persistence behave correctly. Production install prompt and phone/browser speech recognition remain device checks.
@@ -245,3 +246,11 @@ npm run data:export -- --ward YOUR_VERIFIED_WARD_UUID --ward-assignment-reviewed
 Review `data/import-roads.sql` before applying it through the SQL Editor. The utility validates numeric OSM IDs, names, coordinates, and the supplied UUID, uses deterministic road IDs, and preserves existing segments/tickets on conflicts. It writes a file only; it never modifies a database. Source URL, OSM way ID, and snapshot time are retained on imported road rows. No fictional incident is reassigned to a real road.
 
 The dataset integration passed browser checks for the six-photo gallery, hiding/restoring all six annotation overlays, and the simulated-report caption on a ticket. Responsive DOM checks showed one gallery column at the phone-sized preview and two columns at the desktop preview, with no body overflow. A full-page gallery screenshot is saved locally as `output/dataset-evidence.jpg` (ignored by Git). The evidence page, ticket and incident pages, and all six PNG routes returned HTTP 200. The production build and TypeScript check passed. Live Supabase storage/authentication and model inference remain unverified.
+
+## Operations dashboard features
+
+The dashboard now has an action center for report confirmation, unassigned work, pending verification and overdue jobs; switchable 7/30/90-day report/verified-repair trends; a four-stage repair pipeline; active workload by officer; a seven-day deadline calendar; and a ticket/repair activity filter with links to recorded histories. Trends use UTC calendar buckets, exclude future timestamps, and count a repair as verified only when its incident is closed and it has a recorded reviewer and verification timestamp. All summaries use the RLS-visible dataset; counts are not citywide coverage claims. The seed includes two additional scheduled assignments to demonstrate upcoming deadlines.
+
+Search the active queue by road, permanent ticket ID or contractor, filter by status, and sort by priority, age or due date. Unscheduled jobs sort after dated jobs. Filtering and sorting never change the priority formula or database records. CSV export includes only the currently filtered visible queue, with a preview, demo filename labeling, escaped fields and protection against spreadsheet formulas. No private storage paths or user credentials are exported.
+
+Browser verification confirmed the trend switches, ticket/repair activity filters, combined search/status/sort, clearing the filters, and a filtered single-job CSV preview. Responsive DOM checks showed one-column operations panels on a phone-sized viewport and multiple columns on desktop, with no body overflow. The in-app browser did not emit a download event for the Blob CSV link, so download completion remains unverified in that environment; CSV content and escaping passed unit tests. Dashboard screenshot: `output/operations-dashboard.jpg` (ignored by Git). Live Supabase integration tests remain skipped until configured.

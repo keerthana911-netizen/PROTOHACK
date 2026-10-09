@@ -145,7 +145,7 @@
       "lng": 80.271,
       "location_source": "gps",
       "note": "Pothole near station north gate.",
-      "status": "grouped",
+      "status": "assigned",
       "incident_id": "00000000-0000-4000-8000-000000000204",
       "created_at": "2026-10-07T12:00:00.000Z",
       "photo_url": "/dataset-potholes/potholes103.png"
@@ -201,7 +201,7 @@
       "lng": 80.274,
       "location_source": "gps",
       "note": "Small pothole beside the lake.",
-      "status": "grouped",
+      "status": "assigned",
       "incident_id": "00000000-0000-4000-8000-000000000208",
       "created_at": "2026-10-02T12:00:00.000Z",
       "photo_url": "/dataset-potholes/potholes10.png"
@@ -289,7 +289,7 @@
       "opened_at": "2026-10-07T12:00:00.000Z",
       "severity": 0.7,
       "sensitive_location": false,
-      "status": "open",
+      "status": "assigned",
       "lat": 13.085,
       "lng": 80.271,
       "previous_repair_id": null
@@ -333,7 +333,7 @@
       "opened_at": "2026-10-02T12:00:00.000Z",
       "severity": 0.25,
       "sensitive_location": false,
-      "status": "open",
+      "status": "assigned",
       "lat": 13.078,
       "lng": 80.274,
       "previous_repair_id": null
@@ -387,6 +387,30 @@
       "verified_at": null,
       "verified_by": null,
       "photo_url": "/demo-repair.png"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000504",
+      "incident_id": "00000000-0000-4000-8000-000000000204",
+      "owner": "00000000-0000-4000-8000-000000000003",
+      "due_date": "2026-10-10",
+      "contractor_name": "City Works",
+      "warranty_days": 90,
+      "repaired_at": null,
+      "verified_at": null,
+      "verified_by": null,
+      "photo_url": null
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000508",
+      "incident_id": "00000000-0000-4000-8000-000000000208",
+      "owner": "00000000-0000-4000-8000-000000000003",
+      "due_date": "2026-10-12",
+      "contractor_name": "Metro Roads Ltd.",
+      "warranty_days": 90,
+      "repaired_at": null,
+      "verified_at": null,
+      "verified_by": null,
+      "photo_url": null
     }
   ],
   "suggestions": [
@@ -657,17 +681,27 @@
     {
       "id": "00000000-0000-4000-8000-000000000819",
       "entity_type": "report",
-      "entity_id": "00000000-0000-4000-8000-000000000308",
-      "from_status": null,
-      "to_status": "submitted",
-      "actor_id": "00000000-0000-4000-8000-000000000002",
-      "reason": "Citizen submitted a photo and location",
-      "created_at": "2026-10-07T12:00:00.000Z"
+      "entity_id": "00000000-0000-4000-8000-000000000307",
+      "from_status": "grouped",
+      "to_status": "assigned",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Repair job progress recorded",
+      "created_at": "2026-10-08T12:00:00.000Z"
     },
     {
       "id": "00000000-0000-4000-8000-000000000820",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000308",
+      "from_status": null,
+      "to_status": "submitted",
+      "actor_id": "00000000-0000-4000-8000-000000000002",
+      "reason": "Citizen submitted a photo and location",
+      "created_at": "2026-10-07T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000821",
+      "entity_type": "report",
+      "entity_id": "00000000-0000-4000-8000-000000000308",
       "from_status": "submitted",
       "to_status": "grouped",
       "actor_id": "00000000-0000-4000-8000-000000000003",
@@ -675,7 +709,7 @@
       "created_at": "2026-10-07T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000821",
+      "id": "00000000-0000-4000-8000-000000000822",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000309",
       "from_status": null,
@@ -685,7 +719,7 @@
       "created_at": "2026-09-27T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000822",
+      "id": "00000000-0000-4000-8000-000000000823",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000309",
       "from_status": "submitted",
@@ -695,7 +729,7 @@
       "created_at": "2026-09-27T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000823",
+      "id": "00000000-0000-4000-8000-000000000824",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000309",
       "from_status": "grouped",
@@ -705,7 +739,7 @@
       "created_at": "2026-10-08T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000824",
+      "id": "00000000-0000-4000-8000-000000000825",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000310",
       "from_status": null,
@@ -715,7 +749,7 @@
       "created_at": "2026-10-03T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000825",
+      "id": "00000000-0000-4000-8000-000000000826",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000310",
       "from_status": "submitted",
@@ -725,7 +759,7 @@
       "created_at": "2026-10-03T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000826",
+      "id": "00000000-0000-4000-8000-000000000827",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000310",
       "from_status": "grouped",
@@ -735,7 +769,7 @@
       "created_at": "2026-10-08T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000827",
+      "id": "00000000-0000-4000-8000-000000000828",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000311",
       "from_status": null,
@@ -745,7 +779,7 @@
       "created_at": "2026-10-02T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000828",
+      "id": "00000000-0000-4000-8000-000000000829",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000311",
       "from_status": "submitted",
@@ -755,7 +789,17 @@
       "created_at": "2026-10-02T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000829",
+      "id": "00000000-0000-4000-8000-000000000830",
+      "entity_type": "report",
+      "entity_id": "00000000-0000-4000-8000-000000000311",
+      "from_status": "grouped",
+      "to_status": "assigned",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Repair job progress recorded",
+      "created_at": "2026-10-08T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000831",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000312",
       "from_status": null,
@@ -765,7 +809,7 @@
       "created_at": "2026-10-09T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000830",
+      "id": "00000000-0000-4000-8000-000000000832",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000313",
       "from_status": null,
@@ -775,7 +819,7 @@
       "created_at": "2026-10-09T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000831",
+      "id": "00000000-0000-4000-8000-000000000833",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000314",
       "from_status": null,
@@ -785,7 +829,7 @@
       "created_at": "2026-06-01T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000832",
+      "id": "00000000-0000-4000-8000-000000000834",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000314",
       "from_status": "submitted",
@@ -795,7 +839,7 @@
       "created_at": "2026-06-01T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000833",
+      "id": "00000000-0000-4000-8000-000000000835",
       "entity_type": "report",
       "entity_id": "00000000-0000-4000-8000-000000000314",
       "from_status": "grouped",
@@ -805,7 +849,7 @@
       "created_at": "2026-07-02T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000834",
+      "id": "00000000-0000-4000-8000-000000000836",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000203",
       "from_status": null,
@@ -815,7 +859,7 @@
       "created_at": "2026-06-01T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000835",
+      "id": "00000000-0000-4000-8000-000000000837",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000203",
       "from_status": "open",
@@ -825,7 +869,7 @@
       "created_at": "2026-07-02T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000836",
+      "id": "00000000-0000-4000-8000-000000000838",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000201",
       "from_status": null,
@@ -835,7 +879,7 @@
       "created_at": "2026-08-05T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000837",
+      "id": "00000000-0000-4000-8000-000000000839",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000201",
       "from_status": "open",
@@ -845,7 +889,7 @@
       "created_at": "2026-08-26T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000838",
+      "id": "00000000-0000-4000-8000-000000000840",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000202",
       "from_status": null,
@@ -855,7 +899,7 @@
       "created_at": "2026-09-29T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000839",
+      "id": "00000000-0000-4000-8000-000000000841",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000204",
       "from_status": null,
@@ -865,29 +909,9 @@
       "created_at": "2026-10-07T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000840",
-      "entity_type": "incident",
-      "entity_id": "00000000-0000-4000-8000-000000000205",
-      "from_status": null,
-      "to_status": "open",
-      "actor_id": "00000000-0000-4000-8000-000000000003",
-      "reason": "Officer confirmed a separate incident",
-      "created_at": "2026-10-07T12:00:00.000Z"
-    },
-    {
-      "id": "00000000-0000-4000-8000-000000000841",
-      "entity_type": "incident",
-      "entity_id": "00000000-0000-4000-8000-000000000206",
-      "from_status": null,
-      "to_status": "open",
-      "actor_id": "00000000-0000-4000-8000-000000000003",
-      "reason": "Officer confirmed a separate incident",
-      "created_at": "2026-09-27T12:00:00.000Z"
-    },
-    {
       "id": "00000000-0000-4000-8000-000000000842",
       "entity_type": "incident",
-      "entity_id": "00000000-0000-4000-8000-000000000206",
+      "entity_id": "00000000-0000-4000-8000-000000000204",
       "from_status": "open",
       "to_status": "assigned",
       "actor_id": "00000000-0000-4000-8000-000000000003",
@@ -897,6 +921,36 @@
     {
       "id": "00000000-0000-4000-8000-000000000843",
       "entity_type": "incident",
+      "entity_id": "00000000-0000-4000-8000-000000000205",
+      "from_status": null,
+      "to_status": "open",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Officer confirmed a separate incident",
+      "created_at": "2026-10-07T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000844",
+      "entity_type": "incident",
+      "entity_id": "00000000-0000-4000-8000-000000000206",
+      "from_status": null,
+      "to_status": "open",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Officer confirmed a separate incident",
+      "created_at": "2026-09-27T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000845",
+      "entity_type": "incident",
+      "entity_id": "00000000-0000-4000-8000-000000000206",
+      "from_status": "open",
+      "to_status": "assigned",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Officer confirmed severity and assigned a repair job",
+      "created_at": "2026-10-08T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000846",
+      "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000207",
       "from_status": null,
       "to_status": "open",
@@ -905,7 +959,7 @@
       "created_at": "2026-10-03T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000844",
+      "id": "00000000-0000-4000-8000-000000000847",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000207",
       "from_status": "open",
@@ -915,7 +969,7 @@
       "created_at": "2026-10-08T12:00:00.000Z"
     },
     {
-      "id": "00000000-0000-4000-8000-000000000845",
+      "id": "00000000-0000-4000-8000-000000000848",
       "entity_type": "incident",
       "entity_id": "00000000-0000-4000-8000-000000000208",
       "from_status": null,
@@ -923,6 +977,16 @@
       "actor_id": "00000000-0000-4000-8000-000000000003",
       "reason": "Officer confirmed a separate incident",
       "created_at": "2026-10-02T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000849",
+      "entity_type": "incident",
+      "entity_id": "00000000-0000-4000-8000-000000000208",
+      "from_status": "open",
+      "to_status": "assigned",
+      "actor_id": "00000000-0000-4000-8000-000000000003",
+      "reason": "Officer confirmed severity and assigned a repair job",
+      "created_at": "2026-10-08T12:00:00.000Z"
     }
   ],
   "notes": [],

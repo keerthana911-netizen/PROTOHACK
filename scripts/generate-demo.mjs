@@ -42,11 +42,11 @@ const incidents = [
   I(203, 101, -130, 0.8, true, "closed"),
   I(201, 101, -65, 0.85, true, "closed", 13.0827, 80.2707, 503),
   I(202, 101, -10, 0.9, true, "open", 13.08272, 80.27071, 501),
-  I(204, 102, -2, 0.7, false, "open", 13.085, 80.271),
+  I(204, 102, -2, 0.7, false, "assigned", 13.085, 80.271),
   I(205, 102, -2, 0.5, false, "open", 13.08527, 80.271),
   I(206, 103, -12, 0.65, false, "assigned", 13.081, 80.273),
   I(207, 105, -6, 0.8, true, "repaired_pending_review", 13.084, 80.268),
-  I(208, 104, -7, 0.25, false, "open", 13.078, 80.274),
+  I(208, 104, -7, 0.25, false, "assigned", 13.078, 80.274),
 ];
 const J = (n, i, due, repaired, contractor, verified = null) => ({
   id: id(n),
@@ -65,6 +65,8 @@ const jobs = [
   J(501, 201, -46, -45, "Metro Roads Ltd.", -44),
   J(506, 206, -3, null, "City Works"),
   J(507, 207, -2, -1, "City Works"),
+  J(504, 204, 1, null, "City Works"),
+  J(508, 208, 3, null, "Metro Roads Ltd."),
 ];
 const reports = [];
 function R(n, i, note, days, road = 101, lat = 13.0827, lng = 80.2707) {

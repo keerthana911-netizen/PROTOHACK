@@ -22,14 +22,23 @@ import { AiBadge } from "./ai-badge";
 import { IncidentMap } from "./incident-map";
 import { JudgeTour } from "./judge-tour";
 import roadNetwork from "@/data/chennai-roads.json";
+import { operationSummary, repairQueue } from "@/lib/operations";
+import { OperationsPulse } from "./operations-pulse";
+import { QueueExport } from "./queue-export";
 export function Dashboard({
   d,
   filter = "all",
   ai = false,
+  q = "",
+  sort = "priority",
+  status = "all",
 }: {
   d: Dataset;
   filter?: string;
   ai?: boolean;
+  q?: string;
+  sort?: string;
+  status?: string;
 }) {
   const now = new Date();
   const repeats = repeatSegments(d.incidents, d.jobs, now);
@@ -39,24 +48,8 @@ export function Dashboard({
     const j = d.jobs.find((j) => j.incident_id === i.id);
     return j && overdue(j.due_date, i.status, now);
   }).length;
-  const queue = open
-    .filter((i) =>
-      filter === "repeat"
-        ? repeats.includes(i.road_segment_id)
-        : filter === "overdue"
-          ? d.jobs.some(
-              (j) =>
-                j.incident_id === i.id && overdue(j.due_date, i.status, now),
-            )
-          : filter === "review"
-            ? i.status === "repaired_pending_review"
-            : true,
-    )
-    .sort(
-      (a, b) =>
-        priority(b.severity, b.sensitive_location, b.opened_at, now).score -
-        priority(a.severity, a.sensitive_location, a.opened_at, now).score,
-    );
+  const queue = repairQueue(d, { filter, q, sort, status }, now);
+  const operations = operationSummary(d, now);
   const memory = open.find((i) => repeats.includes(i.road_segment_id));
   const prior = memory ? previousRepair(memory, d.incidents, d.jobs) : null;
   const road = (id: string) =>
@@ -229,9 +222,10 @@ export function Dashboard({
           </div>
         ))}
       </div>
+      <OperationsPulse data={operations} demo={d.demo} role={d.role} />
       <div className="grid-main">
         <div>
-          <section className="panel">
+          <section className="panel" id="repair-queue">
             <div className="panel-title">
               <div>
                 <h2>
@@ -243,7 +237,75 @@ export function Dashboard({
                   Ranked by impact and waiting time. Every score is explainable.
                 </p>
               </div>
-              <SlidersHorizontal size={17} color="#8a9580" />
+              <QueueExport
+                demo={d.demo}
+                rows={queue.map((i) => {
+                  const job = d.jobs.find((j) => j.incident_id === i.id);
+                  return {
+                    road: road(i.road_segment_id),
+                    status: i.status,
+                    priority: priority(
+                      i.severity,
+                      i.sensitive_location,
+                      i.opened_at,
+                      now,
+                    ).score,
+                    opened: i.opened_at,
+                    due: job?.due_date ?? "",
+                    contractor: job?.contractor_name ?? "",
+                    reports: d.reports.filter((r) => r.incident_id === i.id)
+                      .length,
+                    incident: i.id,
+                  };
+                })}
+              />
+            </div>
+            <form className="queue-tools" action="/" method="get">
+              <input type="hidden" name="filter" value={filter} />
+              {d.demo && <input type="hidden" name="view" value={d.role} />}
+              <label>
+                Search queue
+                <input
+                  type="search"
+                  name="q"
+                  maxLength={200}
+                  defaultValue={q}
+                  placeholder="Road, ticket, or contractor"
+                />
+              </label>
+              <label>
+                Status
+                <select name="status" defaultValue={status}>
+                  <option value="all">All active statuses</option>
+                  <option value="open">Open</option>
+                  <option value="assigned">Assigned</option>
+                  <option value="repaired_pending_review">
+                    Awaiting review
+                  </option>
+                </select>
+              </label>
+              <label>
+                Sort by
+                <select name="sort" defaultValue={sort}>
+                  <option value="priority">Highest priority</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="due">Earliest due date</option>
+                </select>
+              </label>
+              <button className="button small">
+                <SlidersHorizontal size={14} /> Apply
+              </button>
+            </form>
+            <div className="queue-result">
+              <span>Matching jobs: {queue.length}</span>
+              {(q || status !== "all" || sort !== "priority") && (
+                <Link
+                  className="mini-link"
+                  href={`/?filter=${filter}${suffix}#repair-queue`}
+                >
+                  Reset search & sort
+                </Link>
+              )}
             </div>
             <div className="tabs">
               {[
@@ -275,7 +337,7 @@ export function Dashboard({
               fraction. Report count never affects priority.
             </div>
           </section>
-          <section className="panel">
+          <section className="panel" id="new-reports">
             <div className="panel-title">
               <h2>
                 New citizen reports{" "}
