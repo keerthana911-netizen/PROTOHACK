@@ -27,6 +27,7 @@ export default async function IncidentPage({
   const { id } = await params;
   const p = await searchParams;
   const d = await loadData(p.view, { type: "incident", id });
+  const view = d.demo && d.role !== "officer" ? `?view=${d.role}` : "";
   const i = d.incidents.find((i) => i.id === id);
   if (!i) notFound();
   const road = d.roads.find((r) => r.id === i.road_segment_id);
@@ -51,7 +52,7 @@ export default async function IncidentPage({
   const risk = riskScore(i.road_segment_id, d.incidents, d.jobs);
   return (
     <Shell d={d}>
-      <Link href="/" className="mini-link">
+      <Link href={`/${view}`} className="mini-link">
         ← Repair queue
       </Link>
       <div className="heading" style={{ marginTop: 20 }}>
@@ -164,6 +165,16 @@ export default async function IncidentPage({
           )}
           <section className="panel">
             <h2>Repair job</h2>
+            {d.demo && (
+              <div className="notice">
+                Shared demo records are read only. Assignment, repair uploads
+                and reviewer decisions require a live account.
+                <br />
+                <Link href="/try" className="mini-link">
+                  Practice all repair actions →
+                </Link>
+              </div>
+            )}
             {job ? (
               <>
                 <div className="row-meta">
@@ -413,7 +424,10 @@ export default async function IncidentPage({
               .sort((a, b) => Date.parse(b.opened_at) - Date.parse(a.opened_at))
               .map((x) => (
                 <div className="risk-row" key={x.id}>
-                  <Link href={`/incidents/${x.id}`} className="mini-link">
+                  <Link
+                    href={`/incidents/${x.id}${view}`}
+                    className="mini-link"
+                  >
                     {new Date(x.opened_at).toLocaleDateString("en-IN")} →
                   </Link>
                   <p style={{ fontSize: 12, margin: "5px 0" }}>

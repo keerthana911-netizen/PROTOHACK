@@ -1,16 +1,34 @@
 "use client";
-export default function ErrorPage({ reset }: { reset: () => void }) {
+export default function ErrorPage({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  const updated =
+    /dynamically imported module|loading chunk|chunkloaderror/i.test(
+      error.message,
+    );
   return (
     <main className="main wide">
       <div className="panel">
-        <h1>That action couldn’t be completed.</h1>
+        <h1>
+          {updated
+            ? "A site update is ready."
+            : "That action couldn’t be completed."}
+        </h1>
         <p>
-          Your session, role, or the record’s current state may not allow this
-          action. Check required photos and reasons, then try again.
+          {updated
+            ? "This tab is using an earlier version. Reload to get the current site; saved practice tickets stay in this browser."
+            : "Check your connection, session, required photos and reasons, then try again. If the problem continues, return to the overview."}
         </p>
         <div className="actions">
-          <button className="button" onClick={reset}>
-            Try again
+          <button
+            className="button"
+            onClick={() => (updated ? window.location.reload() : reset())}
+          >
+            {updated ? "Reload updated site" : "Try again"}
           </button>
           <a href="/" className="button secondary">
             Return to overview

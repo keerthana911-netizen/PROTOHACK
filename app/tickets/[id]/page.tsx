@@ -90,7 +90,11 @@ export default async function Ticket({
             <small
               style={{ display: "block", marginTop: 12, color: "#839076" }}
             >
-              Available after repair is recorded.
+              {d.demo
+                ? "Follow-up notes require a live account and configured Supabase workspace. This shared demo is read only."
+                : d.role !== "citizen"
+                  ? "Only the citizen who owns this ticket can submit a follow-up."
+                  : "Available after repair is recorded."}
             </small>
           </section>
           {d.notes

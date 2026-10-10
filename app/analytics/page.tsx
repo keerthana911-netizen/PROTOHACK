@@ -87,6 +87,13 @@ export default async function Analytics({
             </form>
           )}
         </div>
+        {(d.demo || !aiEnabled()) && (
+          <p className="notice">
+            AI search and verdict drafts are unavailable here: they require a
+            live Supabase workspace and an enabled AI provider. The scorecard
+            and audit snapshots below remain inspectable.
+          </p>
+        )}
         <p>
           Numbers come from recorded repairs and later incidents. Each repair
           counts as at most one warranty failure.

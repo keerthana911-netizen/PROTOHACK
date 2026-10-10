@@ -253,7 +253,7 @@ export function OperationsPulse({
             data.deadlines.slice(0, 5).map((j) => (
               <Link
                 className="deadline-row"
-                href={`/incidents/${j.incidentId}`}
+                href={`/incidents/${j.incidentId}${suffix.replace("&", "?")}`}
                 key={j.id}
               >
                 <time dateTime={j.date}>
@@ -309,7 +309,11 @@ export function OperationsPulse({
           </div>
           {feed.length ? (
             feed.map((e) => (
-              <Link href={e.href} className="activity-row" key={e.id}>
+              <Link
+                href={`${e.href}${suffix.replace("&", "?")}`}
+                className="activity-row"
+                key={e.id}
+              >
                 <i />
                 <div>
                   <b>{e.title}</b>

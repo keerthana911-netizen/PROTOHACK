@@ -2116,10 +2116,9 @@ textarea:focus-visible {
   display: none;
 }
 .csv-preview {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: min(420px, 70vw);
+  position: static;
+  margin-top: 8px;
+  width: min(420px, 100%);
   padding: 18px;
   background: #fff;
   border: 1px solid #cbdedd;

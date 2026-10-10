@@ -12,6 +12,7 @@ import {
 } from "@/lib/practice";
 import { priority } from "@/lib/priority";
 import type { Role } from "@/lib/workflow";
+import { FileExport } from "./file-export";
 const storageKey = "roadwatch-practice-v1";
 const stages = [
   "submitted",
@@ -56,6 +57,7 @@ export function PracticeWorkspace() {
   const [after, setAfter] = useState("");
   const [busy, setBusy] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
+  const [exportOpen, setExportOpen] = useState(false);
   useEffect(() => {
     try {
       const saved = localStorage.getItem(storageKey);
@@ -128,28 +130,7 @@ export function PracticeWorkspace() {
     });
   }
   function exportSession() {
-    const blob = new Blob(
-      [
-        JSON.stringify(
-          {
-            ...state,
-            scope:
-              "Browser-local practice, not authenticated municipal records",
-          },
-          null,
-          2,
-        ),
-      ],
-      { type: "application/json" },
-    );
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "roadwatch-practice.json";
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setExportOpen(true);
   }
   if (!ready)
     return (
@@ -200,6 +181,36 @@ export function PracticeWorkspace() {
           </button>
         </div>
       </div>
+      {exportOpen && (
+        <section className="panel csv-preview" aria-label="Practice export">
+          <b>Practice session export</b>
+          <p>
+            This file includes your browser-local tickets, photos and timeline.
+          </p>
+          <FileExport
+            text={JSON.stringify(
+              {
+                ...state,
+                scope:
+                  "Browser-local practice, not authenticated municipal records",
+              },
+              null,
+              2,
+            )}
+            filename="roadwatch-practice.json"
+            mime="application/json"
+            label="Download JSON"
+            disabled={!state.tickets.length}
+          />
+          <button
+            type="button"
+            className="button secondary small"
+            onClick={() => setExportOpen(false)}
+          >
+            Close export
+          </button>
+        </section>
+      )}
       {resetOpen && (
         <div className="notice">
           Clear your browser&apos;s practice tickets and photos? Export first if

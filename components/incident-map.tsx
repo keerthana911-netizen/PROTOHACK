@@ -8,9 +8,11 @@ const Map = dynamic(() => import("./road-map"), {
 export function IncidentMap({
   incidents,
   roads,
+  view = "",
 }: {
   incidents: Incident[];
   roads: Road[];
+  view?: string;
 }) {
-  return <Map incidents={incidents} roads={roads} />;
+  return <Map incidents={incidents} roads={roads} view={view} />;
 }

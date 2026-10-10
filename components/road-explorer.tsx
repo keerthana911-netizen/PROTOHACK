@@ -17,7 +17,7 @@ export function RoadExplorer({ roads }: { roads: MappedRoad[] }) {
       roads.filter((r) => r.name.toLowerCase().includes(search.toLowerCase())),
     [roads, search],
   );
-  const active = roads.find((r) => r.osmId === selected);
+  const active = filtered.find((r) => r.osmId === selected);
   return (
     <div className="network-grid">
       <section className="panel network-list">
@@ -88,7 +88,7 @@ export function RoadExplorer({ roads }: { roads: MappedRoad[] }) {
             </a>
           )}
         </div>
-        <NetworkMap roads={filtered} selected={selected} />
+        <NetworkMap roads={filtered} selected={active?.osmId ?? null} />
         <div className="map-legend">
           <span>
             <i />

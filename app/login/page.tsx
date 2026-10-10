@@ -7,6 +7,43 @@ export default async function Login({
   searchParams: Promise<{ error?: string }>;
 }) {
   const p = await searchParams;
+  if (!configured())
+    return (
+      <main className="login">
+        <Link href="/" className="brand">
+          ◈ RoadWatch
+        </Link>
+        <div className="panel">
+          <span className="eyebrow">EXPLORE ROADWATCH</span>
+          <h1>Choose your perspective.</h1>
+          <p>
+            The public dashboard uses illustrative records. Account sign-in and
+            shared changes require a configured Supabase backend.
+          </p>
+          <Link href="/try" className="button">
+            Try the complete repair flow →
+          </Link>
+          <p>
+            Practice reporting, assignment and verification with tickets saved
+            in your browser.
+          </p>
+          <div className="actions">
+            <Link href="/?view=citizen" className="button secondary">
+              Citizen view
+            </Link>
+            <Link href="/?view=officer" className="button secondary">
+              Officer view
+            </Link>
+            <Link href="/?view=reviewer" className="button secondary">
+              Reviewer view
+            </Link>
+          </div>
+          <p className="section-note">
+            Perspective switches simulate roles; they do not sign you in.
+          </p>
+        </div>
+      </main>
+    );
   return (
     <main className="login">
       <Link href="/" className="brand">
@@ -28,12 +65,7 @@ export default async function Login({
         <form action={login}>
           <label>
             Email
-            <input
-              name="email"
-              type="email"
-              required
-              defaultValue="officer@roadwatch.demo"
-            />
+            <input name="email" type="email" required autoComplete="username" />
           </label>
           <label>
             Password
@@ -41,35 +73,16 @@ export default async function Login({
               name="password"
               type="password"
               required
-              defaultValue="RoadWatchDemo!2026"
+              autoComplete="current-password"
             />
           </label>
           <button disabled={!configured()} className="button">
             Sign in →
           </button>
         </form>
-        <div className="notice">
-          <b>Demo data · three perspectives</b>
-          <p>
-            Citizen: citizen@roadwatch.demo
-            <br />
-            Officer: officer@roadwatch.demo
-            <br />
-            Reviewer: reviewer@roadwatch.demo
-          </p>
-          <p>
-            Password: <code>RoadWatchDemo!2026</code>
-          </p>
-          <small>
-            Available after running the local seed. Change demo passwords before
-            public hosting.
-          </small>
-        </div>
-        {!configured() && (
-          <Link href="/" className="button secondary">
-            Explore read-only demo →
-          </Link>
-        )}
+        <p className="section-note">
+          Use the account provided by your administrator.
+        </p>
       </div>
     </main>
   );

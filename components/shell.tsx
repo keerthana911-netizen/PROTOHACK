@@ -130,7 +130,8 @@ export function Shell({
             />
             {d.demo ? (
               <Link className="mini-link" href="/login">
-                Sign in <ArrowUpRight size={12} style={{ display: "inline" }} />
+                Demo options{" "}
+                <ArrowUpRight size={12} style={{ display: "inline" }} />
               </Link>
             ) : (
               <form action={logout}>

@@ -274,7 +274,12 @@ export function Dashboard({
                 })}
               />
             </div>
-            <form className="queue-tools" action="/" method="get">
+            <form
+              key={`${q}-${status}-${sort}-${filter}`}
+              className="queue-tools"
+              action="/"
+              method="get"
+            >
               <input type="hidden" name="filter" value={filter} />
               {d.demo && <input type="hidden" name="view" value={d.role} />}
               <label>
@@ -515,7 +520,11 @@ export function Dashboard({
                 <MapPin size={11} /> OPENSTREETMAP
               </span>
             </div>
-            <IncidentMap incidents={open} roads={d.roads} />
+            <IncidentMap
+              incidents={open}
+              roads={d.roads}
+              view={suffix.replace("&", "?")}
+            />
             <p className="breakdown">
               Markers show accepted incidents; nearby reports never merge
               automatically.
@@ -584,7 +593,7 @@ export function Dashboard({
                   <span>Inspection required</span>
                 </div>
                 <Link
-                  href={`/incidents/${memory.id}`}
+                  href={`/incidents/${memory.id}${suffix.replace("&", "?")}`}
                   className="button secondary small"
                   style={{ width: "100%", marginTop: 20 }}
                 >
@@ -659,6 +668,7 @@ export function Dashboard({
   );
 }
 function IncidentRow({ i, d, now }: { i: Incident; d: Dataset; now: Date }) {
+  const view = d.demo && d.role !== "officer" ? `?view=${d.role}` : "";
   const p = priority(i.severity, i.sensitive_location, i.opened_at, now);
   const job = d.jobs.find((j) => j.incident_id === i.id);
   const late = job && overdue(job.due_date, i.status, now);
@@ -671,7 +681,7 @@ function IncidentRow({ i, d, now }: { i: Incident; d: Dataset; now: Date }) {
       </div>
       <div>
         <div className="row-title">
-          <Link href={`/incidents/${i.id}`}>
+          <Link href={`/incidents/${i.id}${view}`}>
             <b>{d.roads.find((r) => r.id === i.road_segment_id)?.name}</b>
           </Link>
           {i.sensitive_location && (
@@ -709,7 +719,7 @@ function IncidentRow({ i, d, now }: { i: Incident; d: Dataset; now: Date }) {
           </span>
         )}
         <Link
-          href={`/incidents/${i.id}`}
+          href={`/incidents/${i.id}${view}`}
           className="mini-link"
           style={{ display: "block", marginTop: 12 }}
         >
