@@ -5,6 +5,8 @@ import { Shell } from "@/components/shell";
 import { Timeline } from "@/components/timeline";
 import { flagUnresolved } from "@/lib/actions";
 import { ReportPhoto } from "@/components/report-photo";
+import { reportLinkage } from "@/lib/report-linkage";
+import { distanceMeters } from "@/lib/merge";
 export const dynamic = "force-dynamic";
 export default async function Ticket({
   params,
@@ -15,6 +17,11 @@ export default async function Ticket({
   const d = await loadData("citizen", { type: "report", id });
   const r = d.reports.find((r) => r.id === id);
   if (!r) notFound();
+  const linkage = reportLinkage(r, d.reports, d.demo);
+  const nearby =
+    d.demo && r.ticket_id === "RW-0008"
+      ? d.reports.find((other) => other.ticket_id === "RW-0007")
+      : undefined;
   return (
     <Shell d={d} active="tickets">
       <Link href="/tickets" className="mini-link">
@@ -48,8 +55,19 @@ export default async function Ticket({
           </p>
           {r.incident_id && (
             <div className="notice">
-              Your report is grouped into a shared repair job. Your ticket is
-              preserved.
+              {linkage.shared
+                ? `This repair incident links ${linkage.count} visible citizen tickets. Your original ticket and timeline are preserved.`
+                : d.demo
+                  ? "Your report is linked to a separate repair incident. Your original ticket and timeline are preserved."
+                  : "Your report is linked to a repair incident. Your original ticket and timeline are preserved."}
+              {nearby && nearby.incident_id !== r.incident_id && (
+                <p>
+                  Demo separation proof: this report is approximately{" "}
+                  {Math.round(distanceMeters(r, nearby))} metres from RW-0007 on
+                  Station Road, beyond the 20-metre grouping limit. They remain
+                  linked to different incidents.
+                </p>
+              )}
               <br />
               <Link className="mini-link" href={`/incidents/${r.incident_id}`}>
                 View repair job →

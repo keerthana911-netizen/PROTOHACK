@@ -25,9 +25,16 @@ The public Sites app and the updated local app were checked through the in-app b
 - Reset Cancel preserved the ticket. Clear practice data was not executed against existing stored records.
 - Practice JSON export preview was available and Copy export succeeded. Download-event capture timed out in the in-app browser for both the original hidden-anchor approach and the persistent link. Actual download completion is therefore unverified in this browser; preview and copy provide an alternative.
 
+## Handoff follow-up verification
+
+- Fresh public `/login` displayed “Choose your perspective” and no seed passwords; its practice link opened `/try` successfully at 390 × 844. Screenshots are included in the source ZIP. A physical phone was not available for testing.
+- The public JSON download was retried from a fresh tab at phone width. No completed download event was captured after eight seconds. It remains unverified; this is not proof that all browsers fail to download it.
+- RW-0008's wording now distinguishes its separate incident from the five tickets sharing the earlier College Road incident. The ticket details expose the simulated 30-metre separation from RW-0007 and the 20-metre grouping limit.
+- Role-restricted live views do not infer that an incident has only one report merely because only one report is visible.
+
 ## Automated validation
 
-- 73 regression tests passed; 10 live database integration tests were skipped because no test database was configured.
+- 77 regression tests passed, including four ticket-linkage checks; 10 live database integration tests were skipped because no test database was configured.
 - TypeScript validation and the Next.js production build passed.
 - Public hosting is built separately using the Sites Vinext adapter before publication.
 

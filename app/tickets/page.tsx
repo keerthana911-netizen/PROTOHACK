@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { loadData } from "@/lib/data";
 import { Shell } from "@/components/shell";
+import { reportLinkage } from "@/lib/report-linkage";
 export const dynamic = "force-dynamic";
 export default async function Tickets({
   searchParams,
@@ -47,11 +48,7 @@ export default async function Tickets({
             <p>{r.note}</p>
             <div className="row-meta">
               <span>{new Date(r.created_at).toLocaleDateString("en-IN")}</span>
-              <span>
-                {r.incident_id
-                  ? "Grouped into one repair job · your ticket retained"
-                  : "Awaiting officer grouping"}
-              </span>
+              <span>{reportLinkage(r, d.reports, d.demo).label}</span>
               <Link className="mini-link" href={`/tickets/${r.id}`}>
                 Follow timeline →
               </Link>
