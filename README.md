@@ -6,17 +6,19 @@ A mobile-first pothole reporting MVP built with Next.js App Router, TypeScript, 
 
 Public demo: https://roadwatch-hema-protohack.hemabhushantadithuri.chatgpt.site
 
+Source and commit history: https://github.com/keerthana911-netizen/PROTOHACK
+
 Published through Sites with public access. The separate hosting checkout in `sites/roadwatch` uses the Sites Vinext/Cloudflare Worker starter; this root project retains Next.js. The shared dashboard has no backend credentials and remains read only; its citizen records and repair histories are illustrative, with real dataset photos and a sourced OpenStreetMap road sample clearly labeled.
 
 `/try` now provides a working browser-local practice: submit a report, assign its repair, record after-evidence, and verify closure. It saves tickets, photos and the four-actor timeline in local storage, supports JSON export, validates inputs and retains the prior state when saving fails. Role switches are explicitly simulated. Practice records never become shared municipal records. `/report` offers this practice when Supabase is absent, while preserving the authenticated live flow when configured.
 
-`/presentation` covers the six finals judging categories, the three-minute demo, architecture, scope, tradeoffs and judge Q&A. Fill actual team contributions and event timing in `docs/FINALS-HANDOFF.md`; code cannot prove teamwork or the 3–4 hour execution criterion. The offline acceptance suite now has 73 passing tests; the 10 live database tests remain skipped without credentials.
+`/presentation` covers the six finals judging categories, the three-minute demo, architecture, scope, tradeoffs and judge Q&A. Fill actual team contributions and event timing in `docs/FINALS-HANDOFF.md`; code cannot prove teamwork or the 3–4 hour execution criterion. The offline acceptance suite now has 77 passing tests; the 10 live database tests remain skipped without credentials.
 
 ## Verification status
 
 The application builds and the offline acceptance suite passes. No Supabase project credentials or OpenAI key were supplied. Docker Desktop is installed; its engine did not respond after a background startup attempt. The local Supabase start was stopped without obtaining a running database. **Live database/RLS, real authentication, private uploads, and an end-to-end repair workflow are therefore not yet verified.** The ten integration tests are implemented and skipped unless explicitly configured. SQL parsing is a syntax check, not a substitute for executing migrations or exercising RLS.
 
-The local browser loaded the demo dashboard and displayed the computed contractor message and HIGH risk panel. Further browser screenshot/responsive inspection timed out. HTTP smoke checks returned 200 for `/`, `/login`, `/tickets`, a ticket detail, an incident detail, `/analytics`, `/report`, `/manifest.webmanifest`, `/sw.js`, and `/offline.html`. No live OpenAI request was made or billed.
+The public browser checks verified the dashboard controls, filters, exports preview/copy, role links and complete practice repair flow. Fresh `/login` and `/try` pages were checked at a 390 × 844 mobile viewport. RW-0008 visibly remains a separate incident from RW-0007. See `docs/BUTTON-AUDIT.md` for the evidence and limits: physical-phone testing and actual file-download completion remain unverified; Copy export works as a fallback. Typecheck, the Next.js production build and the hosting adapter build passed. No live OpenAI request was made or billed.
 
 ## Run the read-only demo
 
