@@ -2139,3 +2139,223 @@ textarea:focus-visible {
   margin: 10px 0;
   background: #f3f7f7;
 }
+.practice-invite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  background: #e5f5f0;
+  border: 1px solid #bdddd3;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.practice-invite p {
+  font-size: 13px;
+  margin: 6px 0 0;
+  color: #45645f;
+}
+.practice-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.practice-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.practice-layout h2 {
+  margin: 12px 0;
+}
+.practice-layout p {
+  line-height: 1.65;
+  font-size: 14px;
+}
+.practice-layout form {
+  display: grid;
+  gap: 14px;
+}
+.practice-layout label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+}
+.practice-layout input,
+.practice-layout select,
+.practice-layout textarea {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.practice-coordinates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.practice-layout .practice-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.practice-layout .practice-check input {
+  width: 20px;
+  min-height: 20px;
+}
+.practice-photo {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+.practice-evidence {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+.practice-evidence figure {
+  margin: 0;
+  min-width: 0;
+}
+.practice-evidence img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.practice-evidence figcaption {
+  font-size: 11px;
+  color: #617673;
+  line-height: 1.5;
+}
+.practice-id {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #617673;
+  margin-top: 20px;
+  overflow-wrap: anywhere;
+}
+.practice-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+.practice-steps li {
+  padding: 12px;
+  background: #f1f4f4;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #64716f;
+}
+.practice-steps .done {
+  background: #dff2e9;
+  color: #185f47;
+}
+.practice-steps [aria-current] {
+  outline: 2px solid #188161;
+}
+.practice-timeline {
+  padding-left: 18px;
+}
+.practice-timeline li {
+  padding: 10px 0 12px 8px;
+  border-bottom: 1px solid #e2ebe8;
+}
+.practice-timeline time {
+  display: block;
+  font-size: 11px;
+  color: #64716f;
+  margin-top: 4px;
+}
+.practice-error {
+  background: #fff0ed;
+  border: 1px solid #f0b6a8;
+  color: #913a22;
+}
+.practice-empty {
+  padding: 26px 0;
+}
+.presentation .panel {
+  margin-bottom: 24px;
+  scroll-margin-top: 20px;
+}
+.presentation p,
+.presentation li {
+  line-height: 1.7;
+  font-size: 14px;
+}
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+.criteria-grid .panel {
+  margin: 0;
+}
+.criteria-grid h3 {
+  margin: 16px 0 10px;
+}
+.presentation-script {
+  padding-left: 20px;
+}
+.presentation-script li {
+  padding: 12px 8px;
+}
+.architecture-flow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 24px 0;
+}
+.architecture-flow div {
+  flex: 1;
+  padding: 18px;
+  background: #eef6f3;
+  border-radius: 12px;
+}
+.architecture-flow small {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.judge-answer {
+  padding: 16px 0;
+  border-bottom: 1px solid #dbe6e2;
+}
+.judge-answer summary {
+  cursor: pointer;
+  min-height: 28px;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 760px) {
+  .practice-layout,
+  .criteria-grid {
+    grid-template-columns: 1fr;
+  }
+  .practice-invite {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .architecture-flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .architecture-flow > span {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+  .practice-toolbar .actions {
+    flex-wrap: wrap;
+  }
+}

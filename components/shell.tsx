@@ -35,6 +35,8 @@ export function Shell({
     ["roads", "Real road network", "/roads", MapPinned],
     ["evidence", "Dataset evidence", "/evidence", Images],
     ["analytics", "Insights & audit", "/analytics", ChartNoAxesCombined],
+    ["try", "Try the complete flow", "/try", ShieldCheck],
+    ["presentation", "Presentation & Q&A", "/presentation", ClipboardList],
   ] as const;
   return (
     <div className="shell">

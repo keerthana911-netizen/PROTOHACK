@@ -3,6 +3,7 @@ import { requireRole, configured } from "@/lib/supabase";
 import { submitReport } from "@/lib/actions";
 import LocationPicker from "@/components/location-picker";
 import { VoiceNote } from "@/components/voice-note";
+import { PracticeWorkspace } from "@/components/practice-workspace";
 export const dynamic = "force-dynamic";
 export default async function Report() {
   let roads: { id: string; name: string }[] = [];
@@ -26,44 +27,43 @@ export default async function Report() {
           <p>A photo. A pin. A permanent ticket.</p>
         </div>
       </div>
-      {!configured() && (
-        <div className="notice">
-          Read-only demo. Connect Supabase to submit and track your own reports.
-        </div>
+      {!configured() ? (
+        <PracticeWorkspace />
+      ) : (
+        <form action={submitReport} className="panel">
+          <label>
+            Road segment
+            <select name="segment" required>
+              <option value="">Choose the road</option>
+              {roads.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Photo of the pothole
+            <input
+              name="photo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+          </label>
+          <small>Private storage · JPEG, PNG or WebP · up to 6 MB</small>
+          <h3 style={{ marginTop: 24 }}>Where is it?</h3>
+          <LocationPicker />
+          <VoiceNote />
+          <button className="button" disabled={!configured()}>
+            Create my ticket →
+          </button>
+          <p className="section-note">
+            Your ticket stays yours, even when reports are grouped into one
+            repair job. An officer confirms every grouping.
+          </p>
+        </form>
       )}
-      <form action={submitReport} className="panel">
-        <label>
-          Road segment
-          <select name="segment" required>
-            <option value="">Choose the road</option>
-            {roads.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Photo of the pothole
-          <input
-            name="photo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          />
-        </label>
-        <small>Private storage · JPEG, PNG or WebP · up to 6 MB</small>
-        <h3 style={{ marginTop: 24 }}>Where is it?</h3>
-        <LocationPicker />
-        <VoiceNote />
-        <button className="button" disabled={!configured()}>
-          Create my ticket →
-        </button>
-        <p className="section-note">
-          Your ticket stays yours, even when reports are grouped into one repair
-          job. An officer confirms every grouping.
-        </p>
-      </form>
     </main>
   );
 }

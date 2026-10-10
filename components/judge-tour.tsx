@@ -13,6 +13,12 @@ export function JudgeTour({
   const [step, setStep] = useState(0);
   const steps = [
     {
+      title: "Try the complete core flow",
+      body: "Create a browser-local practice ticket, switch to Officer to assign and record repair evidence, then switch to Reviewer to verify closure. Reload to show the preserved timeline. Role switches are simulation, not authentication.",
+      href: "/try",
+      label: "Start the interactive practice",
+    },
+    {
       title: "Start with real evidence",
       body: "Inspect six public pothole photos and their source annotations. Demo ticket locations and repair histories remain simulated. The boxes are dataset labels, not AI predictions.",
       href: "/evidence",

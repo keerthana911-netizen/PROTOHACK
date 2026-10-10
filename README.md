@@ -6,7 +6,11 @@ A mobile-first pothole reporting MVP built with Next.js App Router, TypeScript, 
 
 Public demo: https://roadwatch-hema-protohack.hemabhushantadithuri.chatgpt.site
 
-Published through Sites on 9 October 2026 with public access. The separate hosting checkout in `sites/roadwatch` uses the Sites Vinext/Cloudflare Worker starter; this root project retains Next.js. The production build and live dashboard trend controls were verified. The public demo has no backend credentials and remains read only; citizen records and repair histories are illustrative, with real dataset photos and a sourced OpenStreetMap road sample clearly labeled.
+Published through Sites with public access. The separate hosting checkout in `sites/roadwatch` uses the Sites Vinext/Cloudflare Worker starter; this root project retains Next.js. The shared dashboard has no backend credentials and remains read only; its citizen records and repair histories are illustrative, with real dataset photos and a sourced OpenStreetMap road sample clearly labeled.
+
+`/try` now provides a working browser-local practice: submit a report, assign its repair, record after-evidence, and verify closure. It saves tickets, photos and the four-actor timeline in local storage, supports JSON export, validates inputs and retains the prior state when saving fails. Role switches are explicitly simulated. Practice records never become shared municipal records. `/report` offers this practice when Supabase is absent, while preserving the authenticated live flow when configured.
+
+`/presentation` covers the six finals judging categories, the three-minute demo, architecture, scope, tradeoffs and judge Q&A. Fill actual team contributions and event timing in `docs/FINALS-HANDOFF.md`; code cannot prove teamwork or the 3–4 hour execution criterion. The offline acceptance suite now has 73 passing tests; the 10 live database tests remain skipped without credentials.
 
 ## Verification status
 

@@ -92,6 +92,20 @@ export function Dashboard({
           </Link>
         )}
       </div>
+      {d.demo && (
+        <div className="practice-invite">
+          <div>
+            <b>Try a repair from start to finish.</b>
+            <p>
+              Create a practice ticket, assign the work, add evidence and verify
+              closure. Saved on your device.
+            </p>
+          </div>
+          <Link href="/try" className="button">
+            Try the complete flow →
+          </Link>
+        </div>
+      )}
       <section
         className="mission-banner"
         aria-label="Repair memory and demo walkthrough"
